@@ -22,10 +22,10 @@
 
 ## 🚧 Dependencies
 
-- Node.js (`>= 12.15, < 13.0`)
-- NPM (`>= 6.13, < 7.0`)
-- Elixir (`~> 1.10`)
-- Erlang (`~> 22.2`)
+- Node.js (`>= 12.18, < 13.0`)
+- NPM (`>= 6.14, < 7.0`)
+- Elixir (`~> 1.11`)
+- Erlang (`~> 23.0`)
 - PostgreSQL (`~> 12.0`)
 
 ## 🏎 Kickstart

@@ -5,8 +5,8 @@ defmodule ElixirBoilerplate.Mixfile do
     [
       app: :elixir_boilerplate,
       version: "0.0.1",
-      elixir: "~> 1.10",
-      erlang: "~> 22.2",
+      elixir: "~> 1.11",
+      erlang: "~> 23.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       test_paths: ["test"],
       test_pattern: "**/*_test.exs",

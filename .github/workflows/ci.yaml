@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        otp-version: [22.2.8]
-        elixir-version: [1.10.2]
+        otp-version: [23.0.4]
+        elixir-version: [1.11.0]
 
     services:
       db:
@@ -33,7 +33,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: 12.15
+          node-version: 12.18
 
       - uses: actions/cache@v2
         id: deps-cache
