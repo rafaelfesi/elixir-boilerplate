@@ -22,25 +22,33 @@ defmodule Environment do
     end
   end
 
-  def get_list_or_first_value(key) do
-    with value when is_bitstring(value) <- get(key),
-         [single_value] <- String.split(value, ",") do
-      single_value
-    else
-      value when is_list(value) -> value
-      _ -> nil
+  def get_cors_origins do
+    case get("CORS_ALLOWED_ORIGINS") do
+      origins when is_bitstring(origins) ->
+        origins
+        |> String.split(",")
+        |> case do
+          [origin] -> origin
+          origins -> origins
+        end
+
+      _ ->
+        nil
     end
   end
 
-  def get_endpoint_static_url_config(nil), do: nil
-  def get_endpoint_static_url_config(""), do: nil
+  def get_endpoint_static_url_config do
+    case get("STATIC_URL_HOST") do
+      host when is_bitstring(host) ->
+        [
+          host: host,
+          scheme: get("STATIC_URL_SCHEME"),
+          port: get("STATIC_URL_PORT")
+        ]
 
-  def get_endpoint_static_url_config(host) do
-    [
-      host: host,
-      scheme: get("STATIC_URL_SCHEME"),
-      port: get("STATIC_URL_PORT")
-    ]
+      _ ->
+        nil
+    end
   end
 end
 
@@ -62,14 +70,14 @@ config :elixir_boilerplate, ElixirBoilerplateWeb.Endpoint,
   debug_errors: Environment.get_boolean("DEBUG_ERRORS"),
   http: [port: port],
   secret_key_base: Environment.get("SECRET_KEY_BASE"),
-  static_url: Environment.get_endpoint_static_url_config(Environment.get("STATIC_URL_HOST")),
+  static_url: Environment.get_endpoint_static_url_config(),
   url: [host: host, scheme: scheme, port: port]
 
 config :elixir_boilerplate, ElixirBoilerplateWeb.Router,
   session_key: Environment.get("SESSION_KEY"),
   session_signing_salt: Environment.get("SESSION_SIGNING_SALT")
 
-config :elixir_boilerplate, Corsica, origins: Environment.get_list_or_first_value("CORS_ALLOWED_ORIGINS")
+config :elixir_boilerplate, Corsica, origins: Environment.get_cors_origins()
 
 config :elixir_boilerplate,
   basic_auth: [
