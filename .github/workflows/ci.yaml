@@ -28,6 +28,10 @@ jobs:
     env:
       MIX_ENV: test
       DATABASE_URL: postgres://postgres:boilerplate@localhost/elixir_boilerplate_test
+      PORT: 4001
+      SECRET_KEY_BASE: G0ieeRljoXGzSDPRrYc2q4ADyNHCwxNOkw7YpPNMa+JgP9iGgJKT4K96Bw/Mf/pd
+      SESSION_KEY: test
+      SESSION_SIGNING_SALT: qh+vmMHsOqcjKF3TSSIsghwt2go48m2+IQ+kMTOB3BrSysSr7D4a21uAtt4yp4wn
 
     steps:
       - uses: actions/checkout@v2
